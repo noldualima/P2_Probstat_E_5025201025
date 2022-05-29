@@ -209,22 +209,85 @@ Maka Kerjakan atau Carilah:
 
 ### Soal 4.A
 Buatlah masing masing jenis spesies menjadi 3 subjek "Grup" (grup 1,grup 2,grup 3). Lalu Gambarkan plot kuantil normal untuk setiap kelompok dan lihat apakah ada outlier utama dalam homogenitas varians.
+```
+# Mengambil data
+> fl <- read.table(url("https://rstatisticsandresearch.weebly.com/uploads/1/0/2/6/1026585/onewayanova.txt"))
+> dim(fl)
+[1] 106   2
+> head(fl)
+     V1     V2
+1 Group Length
+2     1     19
+3     1   18.6
+4     1   18.3
+5     1     18
+6     1   18.2
+> attach(fl)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170882284-5504d4b2-1fbb-4970-a744-9201da99f8a7.png)
+
+```
+# Membuat file menjadi grup
+> fl$V1 <- as.factor(fl$V1)
+> fl$V1 = factor(fl$V1,labels = c("Merah","Kuning","Hijau"))
+```
+
+```
+# Mengecek nilai
+> class(fl$V1)
+[1] "factor"
+
+# Membagi menjadi 3 grup
+> gr1 <- subset(fl, V1=="Merah")
+> gr2 <- subset(fl, V1=="Kuning")
+> gr3 <- subset(fl, V1=="Hijau")
+```
 
 ### Soal 4.B
 Carilah atau periksalah Homogeneity of variances nya , Berapa nilai p yang didapatkan?, Apa hipotesis dan kesimpulan yang dapat diambil ?
+```
+> bartlett.test(Length~Group, data=dataoneway)
+```
+
+```
+Nilai p-value = 0.8054
+Kesimpulan yang didapatkan yaitu
+Bartlett's K-squared memiliki nilai sebesar 0.43292
+dan df bernilai 2
+```
 
 ### Soal 4.C
 Untuk uji ANOVA (satu arah), buatlah model linier dengan Panjang versus Grup dan beri nama model tersebut model 1.
+```
+> qqnorm(group1$Length)
+> qqline(group1$Length)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170882833-be58d9b5-abca-4b20-95a7-ad1941b0a507.png)
+
 
 ### Soal 4.D
 Dari Hasil Poin C, Berapakah nilai-p ? , Apa yang dapat Anda simpulkan dari H0?
+```
+Pada taraf uji 5% didapatkan nilai p-value sebesar 0.0013.
+Maka, terdapat perbedaan panjang kucing yang signifikan berdasarkan grupnya.
+```
 
 ### Soal 4.E
 Verifikasilah jawaban model 1 dengan Post-hoc test Tukey HSD, dari nilai p yang didapatkan apakah satu jenis kucing lebih panjang dari yang lain? Jelaskan.
+```
+> mdl1 <- lm(Length~Group, data=fl)
+> anova(mdl1)
+> TukeyHSD(aov(mdl1))
+```
 
 ### Soal 4.F
 Visualisasikan data dengan ggplot2
-
+```
+> library(ggplot2)
+> ggplot(dataoneway, aes(x = Group, y = Length)) + geom_boxplot(fill = "grey80", colour = "black") + scale_x_discrete() + xlab("Treatment Group") +  ylab("Length (cm)")
+```
 
 ## Soal 5
 Data yang digunakan merupakan hasil eksperimen yang dilakukan untuk mengetahui pengaruh suhu operasi (100˚C, 125˚C dan 150˚C) dan tiga jenis kaca pelat muka (A, B dan C) pada keluaran cahaya tabung osiloskop. Percobaan dilakukan sebanyak 27 kali dan didapat data sebagai berikut: Data Hasil Eksperimen "GTL.csv".
