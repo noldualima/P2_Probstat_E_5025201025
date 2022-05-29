@@ -230,7 +230,7 @@ Buatlah masing masing jenis spesies menjadi 3 subjek "Grup" (grup 1,grup 2,grup 
 ```
 # Membuat file menjadi grup
 > fl$V1 <- as.factor(fl$V1)
-> fl$V1 = factor(fl$V1,labels = c("Merah","Kuning","Hijau"))
+> fl$V1 = factor(fl$V1,labels = c("Oren","Hitam","Putih"))
 ```
 
 ```
@@ -239,9 +239,9 @@ Buatlah masing masing jenis spesies menjadi 3 subjek "Grup" (grup 1,grup 2,grup 
 [1] "factor"
 
 # Membagi menjadi 3 grup
-> gr1 <- subset(fl, V1=="Merah")
-> gr2 <- subset(fl, V1=="Kuning")
-> gr3 <- subset(fl, V1=="Hijau")
+> gr1 <- subset(fl, V1=="Oren")
+> gr2 <- subset(fl, V1=="Hitam")
+> gr3 <- subset(fl, V1=="Putih")
 ```
 
 ### Soal 4.B
@@ -260,8 +260,8 @@ dan df bernilai 2
 ### Soal 4.C
 Untuk uji ANOVA (satu arah), buatlah model linier dengan Panjang versus Grup dan beri nama model tersebut model 1.
 ```
-> qqnorm(group1$Length)
-> qqline(group1$Length)
+> qqnorm(gr1$Length)
+> qqline(gr1$Length)
 ```
 
 ![image](https://user-images.githubusercontent.com/102939348/170882833-be58d9b5-abca-4b20-95a7-ad1941b0a507.png)
@@ -282,12 +282,19 @@ Verifikasilah jawaban model 1 dengan Post-hoc test Tukey HSD, dari nilai p yang 
 > TukeyHSD(aov(mdl1))
 ```
 
+```
+Perbedaan panjang kucing yang signifikan adalah
+grup 2 terhadap grup 1 dan grup 3,
+jika menggunakan 𝛼 = 5%.
+```
+
 ### Soal 4.F
 Visualisasikan data dengan ggplot2
 ```
 > library(ggplot2)
 > ggplot(dataoneway, aes(x = Group, y = Length)) + geom_boxplot(fill = "grey80", colour = "black") + scale_x_discrete() + xlab("Treatment Group") +  ylab("Length (cm)")
 ```
+
 
 ## Soal 5
 Data yang digunakan merupakan hasil eksperimen yang dilakukan untuk mengetahui pengaruh suhu operasi (100˚C, 125˚C dan 150˚C) dan tiga jenis kaca pelat muka (A, B dan C) pada keluaran cahaya tabung osiloskop. Percobaan dilakukan sebanyak 27 kali dan didapat data sebagai berikut: Data Hasil Eksperimen "GTL.csv".
@@ -296,18 +303,93 @@ Dengan data tersebut:
 
 ### Soal 5.A
 Buatlah plot sederhana untuk visualisasi data
+```
+# Install Packages dan Function
+> install.packages("multcompView")
+> library(readr)
+> library(ggplot2)
+> library(multcompView)
+> library(dplyr)
+```
+
+```
+# Membaca file
+> GTL <- read_csv("GTL.csv")
+> head(GTL)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883346-8ceda149-16f3-4d1c-8903-66e522a1bfc9.png)
+
+```
+# Melakukan observasi data
+> str(GTL)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883408-e787f8bd-ce0b-46a0-907e-3f33bf8ff537.png)
+
+
+```
+# Memvisualisai
+> qplot(x = Temp, y = Light, geom = "point", data = GTL) +
++      facet_grid(.~Glass, labeller = label_both)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883420-97921bff-606e-4e8d-b62f-ad5012afb7e1.png)
 
 ### Soal 5.B
 Lakukan uji ANOVA dua arah
+```
+> GTL$Glass <- as.factor(GTL$Glass)
+> GTL$Temp_Factor <- as.factor(GTL$Temp)
+> str(GTL)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883438-dccc997d-1ea8-4f5a-ad05-db763a831a8b.png)
+
+```
+# Melakukan AOV
+> anova <- aov(Light ~ Glass*Temp_Factor, data = GTL)
+> summary(anova)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883468-f1f9e215-4ff8-42dc-99e1-bad9de8f3870.png)
 
 ### Soal 5.C
 Tampilkan tabel dengan mean dan standar deviasi keluaran cahaya untuk setiap perlakuan (kombinasi kaca pelat muka dan suhu operasi)
+```
+> data_summary <- group_by(GTL, Glass, Temp) %>%
++      summarise(mean=mean(Light), sd=sd(Light)) %>%
++      arrange(desc(mean))
+> print(data_summary)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883493-bb4f0acd-28c0-4588-99f0-a96419f8dfe7.png)
 
 ### Soal 5.D
 Lakukan uji Tukey
+```
+> tukey <- TukeyHSD(anova)
+> print(tukey)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883507-d13a0d3d-b709-4a15-aa95-38f2c551183a.png)
 
 ### Soal 5.E
 Gunakan compact letter display untuk menunjukkan perbedaan signifikan antara uji Anova dan uji Tukey
+```
+> tukey.cld <- multcompLetters4(anova, tukey)
+> print(tukey.cld)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883542-e0cdabb5-3ee1-4ca7-87da-e8bfdc5f46ca.png)
+
+```
+> cld <- as.data.frame.list(tukey.cld$`Glass:Temp_Factor`)
+> data_summary$Tukey <- cld$Letters
+> print(data_summary)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170883590-734c248a-8c36-4a8b-b651-7479649c4665.png)
 
 Berikut adalah contoh daftar package dan fungsi yang dapat digunakan (dapat pula menggunakan contoh lainnya)
 
