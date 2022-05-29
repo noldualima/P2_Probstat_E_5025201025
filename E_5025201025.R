@@ -42,8 +42,9 @@ zsum.test(mean.x=23500, sigma.x = 3900, n.x = 100,
 
 # SOAL 3.B
 tsum.test(mean.x=3.64, s.x = 1.67, n.x = 19, 
-          mean.y =2.79 , s.y = 1.32, n.y = 27, 
-          alternative = "greater", var.equal = TRUE)
+          mean.y=2.79, s.y = 1.32, n.y = 27, 
+          alternative = "two.sided", mu = 0, var.equal = TRUE,
+          conf.level = 0.95)
 
 # SOAL 3.C
 install.packages("mosaic")
