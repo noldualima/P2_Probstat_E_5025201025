@@ -90,13 +90,34 @@ Diketahui bahwa mobil dikemudikan rata-rata lebih dari 20.000 kilometer per tahu
 
 ### Soal 2.A
 Apakah Anda setuju dengan klaim tersebut?
+```
+Setuju, karena z-test menolak H0
+```
 
 ### Soal 2.B
 Jelaskan maksud dari output yang dihasilkan!
+```
+> zsum.test(mean.x=23500, sigma.x = 3900, n.x = 100,  
++ 	alternative = "greater", mu = 20000,
++ 	conf.level = 0.95)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170879555-d8d22d25-514b-421c-bbed-14d877565090.png)
+
+```
+Penjelasan:
+Diketahui n = 100, Rata-Rata (X̄) = 23500, dan standar deviasi(σ) = 3900,
+sehingga null hipotesisnya adalah H0 : μ = 20000 
+dan alternatif hipotesisnya adalah H1 : μ > 20000.
+Maka dari itu, true mean is greater than 20000 atau H1 diterima sehingga klaim benar.
+
+```
 
 ### Soal 2.C
 Buatlah kesimpulan berdasarkan P-Value yang dihasilkan!
-
+```
+P-value dari uji tes z adalah < 2.2e-16 atau mendekati 0, dari hasil p-value tersebut hipotesis awal dapat ditolak dan H1 diterima.
+```
 
 ## Soal 3
 Diketahui perusahaan memiliki seorang data analyst ingin memecahkan permasalahan pengambilan keputusan dalam perusahaan tersebut. Selanjutnya didapatkanlah data berikut dari perusahaan saham tersebut.
