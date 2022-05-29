@@ -13,13 +13,77 @@ Berdasarkan data pada tabel diatas, diketahui kadar saturasi oksigen dari respon
 
 ### 1.A
 Carilah Standar Deviasi dari data selisih pasangan pengamatan tabel diatas
+```
+# Memasukkan semua data
+> resp <- c(1,2,3,4,5,6,7,8,9)
+> x <- c(78,75,67,77,70,72,78,74,77)
+> y <- c(100,95,70,90,90,90,89,90,100)
+```
+
+```
+# Mengecek data
+> dt <- data.frame(resp,x,y)
+> dt
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170875397-a074ce3a-e4ff-4386-b214-37755e9a7989.png)
+
+```
+# Mencari selisih
+> diff <- dt[,3]-dt[,2]
+> diff
+[1] 22 20  3 13 20 18 11 16 23
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170875488-7ff9f40b-04e7-46de-af77-3a14e18d312b.png)
+
+```
+# Menghitung Standar Deviasi
+> std1 <- sd(diff)
+> std1
+[1] 6.359595
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170876956-c1eaf184-fdbc-4274-98ca-3587c897659f.png)
+
 
 ### 1.B
 Carilah nilai t (p-value)
+```
+> t.test(y, x, paired = TRUE)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170877999-e965422a-fc56-4b30-a4ee-eb98d988f20e.png)
+
+
+```
+> t <- ((xbar-ybar)-std1)/sqrt(Q*((1/p1)+(1/p2)))
+> t
+[1] -7.025925
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170877076-1c8ed197-d3fe-4f08-bacf-a685e60da31a.png)
+
 
 ### 1.C
 Tentukanlah apakah terdapat pengaruh yang signifikan secara statistika dalam hal kadar saturasi oksigen, sebelum dan sesudah melakukan aktivitas 𝐴 jika diketahui tingkat signifikansi 𝛼 = 5% serta H0 : “tidak ada pengaruh yang signifikan secara statistika dalam hal kadar saturasi oksigen, sebelum dan sesudah melakukan aktivitas 𝐴”
+```
+# Melihat hasil komparasi
+var.test(y, x)
+```
 
+![image](https://user-images.githubusercontent.com/102939348/170878599-af6d4841-95c8-4b58-9352-7ec147e91663.png)
+
+```
+# Melihat pengaruhnya
+t.test(y, x, var.equal = TRUE)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170878656-ba61b4e9-ec40-47a5-9fca-e5e16ec498b0.png)
+
+```
+karena pvalue>0,05 atau pvalue>alpha maka KEPUTUSAN H0 GAGAL atau DITOLAK, tidak ada pengaruh yang signifikan secara statistika dalam hal kadar saturasi oksigen, sebelum dan sesudah melakukan aktivitas.
+```
 
 ## Soal 2
 Diketahui bahwa mobil dikemudikan rata-rata lebih dari 20.000 kilometer per tahun. Untuk menguji klaim ini, 100 pemilik mobil yang dipilih secara acak diminta untuk mencatat jarak yang mereka tempuh. Jika sampel acak menunjukkan rata-rata 23.500 kilometer dan standar deviasi 3900 kilometer. (Kerjakan menggunakan library seperti referensi pada modul)
