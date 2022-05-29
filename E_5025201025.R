@@ -29,7 +29,9 @@ library(BSDA)
 # Jawaban di README.md
 
 # SOAL 2.B 
-tsum.test(mean.x=23500, sd(3900), n.x=100)
+zsum.test(mean.x=23500, sigma.x = 3900, n.x = 100,  
+	alternative = "greater", mu = 20000,
+	conf.level = 0.95)
 
 # SOAL 2.C
 # Jawaban di README.md
