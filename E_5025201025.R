@@ -69,13 +69,13 @@ head(fl)
 attach(fl)
 
 fl$V1 <- as.factor(fl$V1)
-fl$V1 = factor(fl$V1,labels = c("Kucing Oren","Kucing Hitam","Kucing Putih","Kucing Oren"))
+fl$V1 = factor(fl$V1,labels = c("Merah","Kuning","Hijau"))
 
 class(fl$V1)
 
-gr1 <- subset(fl, V1=="Kucing Oren")
-gr2 <- subset(fl, V1=="Kucing Hitam")
-gr3 <- subset(fl, V1=="Kucing Putih")
+gr1 <- subset(fl, V1=="Merah")
+gr2 <- subset(fl, V1=="Kuning")
+gr3 <- subset(fl, V1=="Hijau")
 
 # SOAL 4.B
 bartlett.test(Length~V1, data=dataoneway)
