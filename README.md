@@ -3,14 +3,6 @@
 - NRP   : 5025201025
 - Kelas : Probstat E
 ------------------------------
-```
-Berikut adalah contoh daftar package dan fungsi yang dapat digunakan (dapat pula menggunakan contoh lainnya)
-
-● Packages: readr, ggplot2, multcompView, dplyr
-
-● Function: aov, TukeyHSD, qplot, group_by, summarise, multcompLetters4
-```
-------------------------------
 
 ## Soal 1
 Seorang peneliti melakukan penelitian mengenai pengaruh aktivitas 𝐴 terhadap kadar saturasi oksigen pada manusia. Peneliti tersebut mengambil sampel sebanyak 9 responden. Pertama, sebelum melakukan aktivitas 𝐴, peneliti mencatat kadar saturasi oksigen dari 9 responden tersebut. Kemudian, 9 responden tersebut diminta melakukan aktivitas 𝐴. Setelah 15 menit, peneliti tersebut mencatat kembali kadar saturasi oksigen dari 9 responden tersebut. Berikut data dari 9 responden mengenai kadar saturasi oksigen sebelum dan sesudah melakukan aktivitas?
@@ -115,3 +107,9 @@ Lakukan uji Tukey
 
 ### Soal 5.E
 Gunakan compact letter display untuk menunjukkan perbedaan signifikan antara uji Anova dan uji Tukey
+
+Berikut adalah contoh daftar package dan fungsi yang dapat digunakan (dapat pula menggunakan contoh lainnya)
+
+● Packages: readr, ggplot2, multcompView, dplyr
+
+● Function: aov, TukeyHSD, qplot, group_by, summarise, multcompLetters4
