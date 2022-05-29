@@ -82,8 +82,11 @@ t.test(y, x, var.equal = TRUE)
 ![image](https://user-images.githubusercontent.com/102939348/170878656-ba61b4e9-ec40-47a5-9fca-e5e16ec498b0.png)
 
 ```
-karena pvalue>0,05 atau pvalue>alpha maka KEPUTUSAN H0 GAGAL atau DITOLAK, tidak ada pengaruh yang signifikan secara statistika dalam hal kadar saturasi oksigen, sebelum dan sesudah melakukan aktivitas.
+karena pvalue>0,05 atau pvalue>alpha maka KEPUTUSAN H0 GAGAL atau DITOLAK,
+tidak ada pengaruh yang signifikan secara statistika
+dalam hal kadar saturasi oksigen, sebelum dan sesudah melakukan aktivitas.
 ```
+
 
 ## Soal 2
 Diketahui bahwa mobil dikemudikan rata-rata lebih dari 20.000 kilometer per tahun. Untuk menguji klaim ini, 100 pemilik mobil yang dipilih secara acak diminta untuk mencatat jarak yang mereka tempuh. Jika sampel acak menunjukkan rata-rata 23.500 kilometer dan standar deviasi 3900 kilometer. (Kerjakan menggunakan library seperti referensi pada modul)
@@ -116,8 +119,10 @@ Maka dari itu, true mean is greater than 20000 atau H1 diterima sehingga klaim b
 ### Soal 2.C
 Buatlah kesimpulan berdasarkan P-Value yang dihasilkan!
 ```
-P-value dari uji tes z adalah < 2.2e-16 atau mendekati 0, dari hasil p-value tersebut hipotesis awal dapat ditolak dan H1 diterima.
+P-value dari uji tes z adalah < 2.2e-16 atau mendekati 0,
+dari hasil p-value tersebut hipotesis awal dapat ditolak dan H1 diterima.
 ```
+
 
 ## Soal 3
 Diketahui perusahaan memiliki seorang data analyst ingin memecahkan permasalahan pengambilan keputusan dalam perusahaan tersebut. Selanjutnya didapatkanlah data berikut dari perusahaan saham tersebut.
@@ -128,24 +133,70 @@ Dari data diatas berilah keputusan serta kesimpulan yang didapatkan dari hasil d
 
 ### Soal 3.A
 H0 dan H1
+- Hitung H0:
+
+![image](https://user-images.githubusercontent.com/102939348/170880174-36770017-7118-4cfe-b5ee-f0de1d98f105.png)
+
+- Hitung H1:
+
+![image](https://user-images.githubusercontent.com/102939348/170880191-74d675ef-98f7-4bf1-b924-4538a5233f89.png)
+
+```
+# H0 = (miu1 = miu2)
+# H1 = (miu1 != miu2)
+```
 
 ### Soal 3.B
 Hitung Sampel Statistik
+```
+> tsum.test(mean.x=3.64, s.x = 1.67, n.x = 19, 
++           mean.y=2.79, s.y = 1.32, n.y = 27, 
++           alternative = "two.sided", mu = 0, var.equal = TRUE,
++           conf.level = 0.95)
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170880565-bbc5a931-f265-4012-9974-2182f6796255.png)
 
 
 ### Soal 3.C
 Lakukan Uji Statistik (df =2)
+```
+# Menggunakan package library Mosaic
+> install.packages("mosaic")
+> library(mosaic)
+```
+
+```
+# Menggunakan fungsi plotDist()
+> plotDist(dist='t', df=2, col="blue")
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170881130-4e79ede4-8ac4-4547-83be-58c62ab61e29.png)
 
 
 ### Soal 3.D
 Nilai Kritikal
+```
+> qchisq(p = 0.05, df = 2, lower.tail=FALSE)
+[1] 5.991465
+```
+
+![image](https://user-images.githubusercontent.com/102939348/170881544-9f58d3b5-74d1-4e5b-9338-0b5d8227c9d7.png)
 
 ### Soal 3.E
 Keputusan
+```
+Keputusan dapat diperoleh dari nilai t,
+karena nilai t test < t kritikal
+maka tidak ada bukti yg cukup untuk menolak H0
+```
 
 ### Soal 3.F
 Kesimpulan
-
+```
+Perbedaan rata-rata yang terjadi tidak ada jika dilihat dari uji statistik.
+Namun, akan ada (meski tidak signifikan) jika dipengaruhi oleh nilai kritikal.
+```
 
 ## Soal 4
 Seorang Peneliti sedang meneliti spesies dari kucing di ITS. Dalam penelitiannya ia mengumpulkan data tiga spesies kucing yaitu kucing oren, kucing hitam dan kucing putih dengan panjangnya masing-masing. Jika:
