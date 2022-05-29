@@ -1,27 +1,24 @@
 # SOAL 1
 # SOAL 1.A
-bfr <- c(78, 75, 67, 77, 70, 72, 28, 74, 77)
-afr <- c(100, 95, 70, 90, 90, 90, 89, 90, 100)
+resp <- c(1,2,3,4,5,6,7,8,9)
+x <- c(78,75,67,77,70,72,78,74,77)
+y <- c(100,95,70,90,90,90,89,90,100)
 
-dt <- data.frame(
-    gr = rep(c("before", "after"), each = 9),
-    st = c(bfr, afr)
-)
+dt <- data.frame(resp,x,y)
+dt
 
-print(dt)
+diff <- dt[,3]-dt[,2]
+diff
 
-sd_bfr <- sd(bfr)
-sd_bfr
-
-sd_afr <- sd(afr)
-sd_afr
+std1 <- sd(diff)
+std1
 
 # SOAL 1.B
-t.test(bfr, afr, alternative = "greater", var.equal = FALSE)
+t.test(y, x, paired = TRUE)
 
 # SOAL 1.C
-var.test(bfr, afr)
-t.test(bfr, afr, mu = 0, alternative = "two.sided", var.equal = TRUE)
+var.test(y, x)
+t.test(y, x, var.equal = TRUE)
 
 
 # SOAL 2
